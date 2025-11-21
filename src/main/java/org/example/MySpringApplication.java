@@ -12,7 +12,7 @@ public class MySpringApplication {
 
     public static void main(String[] args) {
 
-        ApplicationContext context = SpringApplication.run(MySpringApplication.class, args);
+        /*ApplicationContext context = SpringApplication.run(MySpringApplication.class, args);
 
         TransientComponent t1 = context.getBean(TransientComponent.class);
         t1.operation();
@@ -25,6 +25,7 @@ public class MySpringApplication {
         s2.operation();
 
         ClientComponent c = context.getBean(ClientComponent.class);
-        c.operation();
+        c.operation();*/
+        SpringApplication.run(MySpringApplication.class, args);
     }
 }
