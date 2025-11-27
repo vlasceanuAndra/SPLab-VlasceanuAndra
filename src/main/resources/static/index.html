@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books SSE</title>
+</head>
+<body>
+<h1>All Books</h1>
+
+<div id="sseDiv">Waiting for books...</div>
+
+<script>
+
+    if (typeof(EventSource) !== "undefined") {
+
+        const source = new EventSource('/books-sse');
+
+        source.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+
+            const div = document.getElementById("sseDiv");
+            div.innerHTML += "<br>Book added: " + data.title + " (ID: " + data.id + ")";
+        };
+
+    } else {
+        document.getElementById("sseDiv").innerHTML = "Your browser does not support server-sent events.";
+    }
+</script>
+</body>
+</html>
