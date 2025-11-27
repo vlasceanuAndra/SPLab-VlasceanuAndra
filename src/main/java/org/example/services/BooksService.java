@@ -1,35 +1,52 @@
 package org.example.services;
 
+import lombok.RequiredArgsConstructor;
+import org.example.observer.AllBooksSubject;
+import org.example.persistence.BooksRepository;
+import org.example.splaborator.Book;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class BooksService {
 
-    private final Map<Integer, String> books = new HashMap<>();
-
-    public List<String> getAll() {
-        return new ArrayList<>(books.values());
+    private final BooksRepository booksRepository;
+    private final AllBooksSubject allBooksSubject;
+    public List<Book> getAll() {
+        return booksRepository.findAll();
     }
 
-    public String get(int id) {
-        return books.get(id);
+    public Book get(Long id) {
+        return booksRepository.findById(id).orElse(null);
     }
 
-    public String create(String title) {
-        int id = books.size() + 1;
-        books.put(id, title);
-        return "Created book with id " + id;
+    public Book create(String title) {
+        Book book = new Book(title);
+        Book savedBook = booksRepository.save(book);
+        System.out.println("--- CARTE SALVATA, ACUM NOTIFIC... ---");
+        allBooksSubject.add(savedBook);
+        return savedBook;
     }
 
-    public String update(int id, String title) {
-        books.put(id, title);
-        return "Updated book " + id;
+    public Book update(Long id, String title) {
+        Optional<Book> bookOptional = booksRepository.findById(id);
+        if (bookOptional.isPresent()) {
+            Book book = bookOptional.get();
+            book.setTitle(title);
+            booksRepository.save(book);
+            return book;
+        }
+        return null;
     }
 
-    public String delete(int id) {
-        books.remove(id);
-        return "Deleted book " + id;
+    public String delete(Long id) {
+        if (booksRepository.existsById(id)) {
+            booksRepository.deleteById(id);
+            return "Deleted book " + id;
+        }
+        return "Book not found " + id;
     }
 }

@@ -24,26 +24,23 @@ public class BooksController {
     }
 
     @GetMapping("/{id}")
-    public Object getBookById(@PathVariable int id) {
+    public Object getBookById(@PathVariable Long id) {
         return new GetBookByIdCommand(booksService, id).execute();
     }
 
     @PutMapping("/{id}")
-    public Object updateBook(@PathVariable int id, @RequestBody String title) {
+    public Object updateBook(@PathVariable Long id, @RequestBody String title) {
         return new UpdateBookCommand(booksService, id, title).execute();
     }
 
     @DeleteMapping("/{id}")
-    public Object deleteBook(@PathVariable int id) {
+    public Object deleteBook(@PathVariable Long id) {
         return new DeleteBookCommand(booksService, id).execute();
     }
 
-    // ASYNC for POST
     @PostMapping
     public ResponseEntity<Object> createBook(@RequestBody String title) {
-
         String jobId = UUID.randomUUID().toString();
-
         CreateBookCommand cmd = new CreateBookCommand(booksService, title);
         JobDescriptor job = new JobDescriptor(jobId, cmd);
 

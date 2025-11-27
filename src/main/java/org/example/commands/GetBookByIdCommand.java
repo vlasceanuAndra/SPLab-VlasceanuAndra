@@ -4,9 +4,9 @@ import org.example.services.BooksService;
 
 public class GetBookByIdCommand implements Command {
     private final BooksService service;
-    private final int id;
+    private final Long id;
 
-    public GetBookByIdCommand(BooksService service, int id) {
+    public GetBookByIdCommand(BooksService service, Long id) {
         this.service = service;
         this.id = id;
     }

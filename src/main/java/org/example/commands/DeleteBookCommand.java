@@ -4,9 +4,9 @@ import org.example.services.BooksService;
 
 public class DeleteBookCommand implements Command {
     private final BooksService service;
-    private final int id;
+    private final Long id;
 
-    public DeleteBookCommand(BooksService service, int id) {
+    public DeleteBookCommand(BooksService service, Long id) {
         this.service = service;
         this.id = id;
     }

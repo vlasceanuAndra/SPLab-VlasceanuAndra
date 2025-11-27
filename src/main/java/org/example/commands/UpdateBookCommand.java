@@ -4,10 +4,10 @@ import org.example.services.BooksService;
 
 public class UpdateBookCommand implements Command {
     private final BooksService service;
-    private final int id;
+    private final Long id;
     private final String title;
 
-    public UpdateBookCommand(BooksService service, int id, String title) {
+    public UpdateBookCommand(BooksService service, Long id, String title) {
         this.service = service;
         this.id = id;
         this.title = title;
