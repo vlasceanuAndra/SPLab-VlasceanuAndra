@@ -1,0 +1,11 @@
+Proiect Individual:
+
+- O aplicatie in Java ce foloseste framework-ul Spring Boot, care expune un API de tip RESTful pentru gestionarea unui catalog de produse ce face operatiile de creare, citire, editare si stergere.
+- Am folosit si o baza de date relationala H2.
+- Design Pattern-urile folosite sunt:
+     -> Sigleton - Creational
+     -> Facade - Structural
+     -> Repository - Structural/Comportamental
+- Mod de functionare: Dupa pornire, pe link-ul http://localhost:8080/api/products se afiseaza lista produselor. Iar conectarea la baza de date se face la link-ul http://localhost:8080/h2-console cu JDBC: jdbc:h2:mem:testdb , user: sa, password: password
+
+
